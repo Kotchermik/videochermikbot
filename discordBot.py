@@ -388,10 +388,10 @@ async def parse_command(message):
          case "audios":
             
             directory = "./editor/sounds"
-            embed = discord.Embed(title=f"audios yeah")
+            embed = discord.Embed(title=f"audios")
             for filename in os.listdir(directory):
                 embed.add_field(name=filename, value=" ", inline=False)
-            embed.
+            embed.set_footer(text='made by wawalol!')
             await message.reply(embed=embed)
         case "concat":
             Task(
