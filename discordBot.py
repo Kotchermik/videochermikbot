@@ -354,6 +354,10 @@ async def parse_command(message):
         final_command_name = "help"
     elif cmd == "hat":
         final_command_name = "hat"
+    elif cmd == "cmds":
+        final_command_name = "cmds"
+    elif cmd == "audios":
+        final_command_name = "audios"
     elif (ev1 := (cmd in ["destroy", ""])) or has_meta_prefix:
         final_command_name = "destroy"
         if not ev1 or cmd == "":
@@ -375,6 +379,20 @@ async def parse_command(message):
             embed = discord.Embed(title = 'hat', description = 'hat')
             embed.set_image(url = "https://cdn.discordapp.com/attachments/748021401016860682/920801735147139142/5298188282_1639606638167.png")
             await message.reply("Hat", embed=embed)
+        case "cmds":
+            embed = discord.Embed(title = 'commands', description = '**abr** - reduce audio quality\n**vbr** - reduce video quality\n**watermark** - adds a watermark on the video\n**bandicam** *or* **hypercam** - adds a bandicam / hypercam watermark\n**topcaption** *or* **bottomcaption** - haha funny caption up or down hahahahaha\n**toptext** *or* **bottomtext** - text in impact font\n**normalcaption** - twitter-like caption\n**topcap** *or* **bottomcap** - centered caption at the top or bottom\n**holdframe** - makes the video freeze on the first frame for a number of seconds\n**speed** - slows down / speeds up video\n**deepfry** - deepfries the video\n**contrast** - adds extra contrast\n**sharpen** - sharpening filter\n**hue** - changes the hue\n**hcycle** - rotates the hue of the video\n**vreverse** *or* **areverse** - reverses the video or audio\n**reverse** - reverses the audio + video\n**playreverse** - 1 = plays, then reverses. 2 = reverses, then plays the video\n**hmirror** - mirrors horizontal, 1 is the left half, 2 is the right half\n**vmirror** - vertical mirror, 1 is the top half, 2 is the bottom half\n**invert** - inverts colors\n**wscale** - set horizontal res\n**hscale** - horizontal scale, sets the vertical resolution\n**hcrop** *or* **vcrop** - how much to horizontally / vertically crop the video, in terms of precent.\n**hflip** or **vflip** - horizontally / vertically\n**zoom** - zooms towards the middle of the video. negative values do the same, but more pixelated.\n**shake** - shake the video\n**lag** - reverse frames in chunks\n**rlag** - the same as **lag**, but shuffles the frames\n**fps** - change the videos fps\n**acid** - spill acid on the video\n**fe** - fisheye effect\n**wav** - add a wave to the video ; **wava** - amount of waves ; **wavs** - how big waves are\n**se** - makes **start** and **end** correspond to when the effects are applied ; **s** - time when video begins, in seconds. or start of effect with **selection** ; **e** - time when the video ends, or end of effect with **selection**\n**delf** *or* **dell** - if selection is enabled, deletes parts of video before **s**tart / **e**nd\n**vol** - change the volume of the video\n**mt** - mutes the audio\n**wub** - wobble the audio\n**bs** - bassboost\n**pch** - set the audio pitch**\n**rvb** - reverb effect\n**rvd** - echo response time, 100 means it takes the longest for an echo to bounce back\n**cr** - obliterate audio\n**er** - earrape audio\n**mus** - added by using a yt id, the text after `?watch=`. must be under 5 mins\n**musd** - number of seconds corresponding to when the added music starts\n**muss** - starts the song at a given time of the song in seconds\n**sfx** - add random sound effects\n**dm** - datamosh effect\n**ytp** - adds random plays and reverses to a video.\n**sh** - shuffle the video\n**st** - add random stutters to the video\n**rc** - clones audio and corrupts video\n**glch** - glitch effect\n*cmds* - shows this embed\nthats it!')
+            embed.set_footer(text='made by wawalol!')
+            await message.reply(embed=embed)
+            embed1 = discord.Embed(title = '', description = '**repu** - repeats video until this time is reached')
+            await message.reply(embed=embed1)
+         case "audios":
+            
+            directory = "./editor/sounds"
+            embed = discord.Embed(title=f"audios yeah")
+            for filename in os.listdir(directory):
+                embed.add_field(name=filename, value=" ", inline=False)
+            embed.
+            await message.reply(embed=embed)
         case "concat":
             Task(
                 Action(prepare_concat, message, args,
