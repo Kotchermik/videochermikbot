@@ -188,7 +188,7 @@ def timecodeBreak(file, m):
     new.write(byteData)
 
 def edit(file, groupData, par, workingDir = "", resourceDir = "..", toVideo = False, toGif = False, disallowTimecodeBreak = False, HIDE_FFMPEG_OUT = True, HIDE_ALL_FFMPEG = True, SHOW_TIMER = False, fixPrint = fixPrint):
-    videoFX = ['playreverse', 'hmirror', 'vmirror', 'lag', 'rlag', 'shake', 'fisheye', 'zoom', 'bottomtext', 'toptext', 'normalcaption', 'topcap', 'bottomcap', 'topcaption', 'bottomcaption', 'hypercam', 'bandicam', 'deepfry', 'contrast', 'hue', 'hcycle', 'speed', 'vreverse', 'areverse', 'reverse', 'wscale', 'hscale', 'sharpen', 'watermark', 'framerate', 'invert', 'wave', 'waveamount', 'wavestrength', 'acid', 'hcrop', 'vcrop', 'hflip', 'vflip', 'chermik', 'sts']
+    videoFX = ['playreverse', 'hmirror', 'vmirror', 'lag', 'rlag', 'shake', 'fisheye', 'zoom', 'bottomtext', 'toptext', 'normalcaption', 'topcap', 'bottomcap', 'topcaption', 'bottomcaption', 'hypercam', 'bandicam', 'deepfry', 'contrast', 'hue', 'hcycle', 'speed', 'vreverse', 'areverse', 'reverse', 'wscale', 'hscale', 'sharpen', 'watermark', 'framerate', 'invert', 'wave', 'waveamount', 'wavestrength', 'acid', 'hcrop', 'vcrop', 'hflip', 'vflip', 'chermik', 'sts', 'wawalol']
     audioFX = ['reverb', 'mute', 'threshold', 'crush', 'wobble', 'music', 'sfx', 'volume', 'autotune']
 
     d = {i: None for i in par}
@@ -521,6 +521,10 @@ def edit(file, groupData, par, workingDir = "", resourceDir = "..", toVideo = Fa
             nonlocal video, audio
             video = video.overlay(ffmpeg.input(f"{resourceDir}/images/watermark/sts.png").filter("scale", w = width, h = height))
 
+        def wawalol():
+            nonlocal video, audio
+            video = video.overlay(ffmpeg.input(f"{resourceDir}/images/watermark/wawa.png").filter("scale", w = width, h = height))
+
         def watermark():
             nonlocal video, audio, height
             height = int(height)
@@ -556,6 +560,10 @@ def edit(file, groupData, par, workingDir = "", resourceDir = "..", toVideo = Fa
 
                 if ch and getName(i) == "sts":
                     sts()
+                    ch = False
+
+                if ch and getName(i) == "wawalol":
+                    wawalol()
                     ch = False
 
             height = str(height)
@@ -694,6 +702,7 @@ def edit(file, groupData, par, workingDir = "", resourceDir = "..", toVideo = Fa
             'hypercam': hypercam,
             'bandicam': bandicam,
             'sts': sts,
+            'wawalol': wawalol,
             'chermik': chermik,
             'deepfry': deepfry,
             'contrast': contrast,
@@ -980,6 +989,7 @@ def videoEdit(originalFile, args, workingDir = "./", resourceDir = path.dirname(
         "hcycle"        :[V, "huec", round(r(0, 100)) ],
         "hypercam"      :[V, "hypc", 1 ],
         "sts"      :[V, "sts", 1 ],
+        "wawalol"      :[V, "wawalol", 1 ],
         "chermik"      :[V, "chrk", 1 ],
         "bandicam"      :[V, "bndc", 1 ],
         "normalcaption" :[S, "nc"  , str(r(0, 100)) ],
